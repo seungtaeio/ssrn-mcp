@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "quant-paper-mcp"
+version = "0.1.0"
+description = "Unofficial SSRN research companion using independent bibliographic metadata APIs"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+keywords = ["mcp", "ssrn", "quantitative-finance", "research", "openalex", "crossref"]
+dependencies = ["mcp>=2.3,<3", "httpx>=0.28,<1"]
+
+[project.urls]
+Repository = "https://github.com/seungtaeio/ssrn-mcp"
+Issues = "https://github.com/seungtaeio/ssrn-mcp/issues"
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.23"]
+
+[project.scripts]
+quant-paper-mcp = "quant_paper_mcp.server:main"
+ssrn-mcp = "quant_paper_mcp.server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/quant_paper_mcp"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+asyncio_mode = "auto"
